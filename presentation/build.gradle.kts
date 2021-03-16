@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -17,6 +18,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility =  JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -44,4 +50,9 @@ dependencies {
     implementation(Dependencies.coroutine_lifecycle)
     implementation(Dependencies.coroutine_livedata)
     implementation(Dependencies.coroutine)
+
+    implementation (Dependencies.hilt_android)
+    implementation (Dependencies.hilt_viewmodel)
+    kapt (Dependencies.hilt_androidx_compiler)
+    kapt (Dependencies.hilt_compiler)
 }

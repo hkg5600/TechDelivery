@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -13,6 +14,11 @@ android {
         minSdkVersion (24)
         targetSdkVersion (30)
 
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility =  JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -36,4 +42,7 @@ dependencies {
     androidTestImplementation (Dependencies.test_espresso)
 
     implementation(Dependencies.coroutine)
+
+    implementation (Dependencies.hilt_android)
+    kapt (Dependencies.hilt_compiler)
 }
