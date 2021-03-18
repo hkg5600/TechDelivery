@@ -4,6 +4,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-android")
 }
 
 android {
@@ -22,7 +23,12 @@ android {
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility =  JavaVersion.VERSION_1_8
+        targetCompatibility =  JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+        options.jvmTarget = "1.8"
     }
 
     buildTypes {
@@ -30,6 +36,10 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 }
 
@@ -45,6 +55,11 @@ dependencies {
     testImplementation (Dependencies.junit)
     androidTestImplementation (Dependencies.android_junit)
     androidTestImplementation (Dependencies.test_espresso)
+
+    implementation(Dependencies.lifecycle_extension)
+
+    implementation(Dependencies.activity_ktx)
+    implementation(Dependencies.fragment_ktx)
 
     implementation(Dependencies.coroutine_viewmodel)
     implementation(Dependencies.coroutine_lifecycle)

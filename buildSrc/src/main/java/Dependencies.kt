@@ -12,6 +12,10 @@ object Dependencies {
     const val coroutine_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val coroutine_lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     const val coroutine_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    const val lifecycle_extension = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
+    const val activity_ktx = "androidx.activity:activity-ktx:1.0.0"
+    const val fragment_ktx = "androidx.fragment:fragment-ktx:1.2.5"
 
     const val hilt_android = "com.google.dagger:hilt-android:2.28-alpha"
     const val hilt_compiler = "com.google.dagger:hilt-android-compiler:2.28-alpha"
