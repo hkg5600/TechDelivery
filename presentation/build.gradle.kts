@@ -52,6 +52,8 @@ dependencies {
     implementation (Dependencies.core_ktx)
     implementation (Dependencies.appcompat)
     implementation (Dependencies.constraintlayout)
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     testImplementation (Dependencies.junit)
     androidTestImplementation (Dependencies.android_junit)
     androidTestImplementation (Dependencies.test_espresso)
