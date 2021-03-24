@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import com.example.data.session.RemoteUserSessionDataSource
+import com.example.data.session.FirebaseUserSession
 import com.example.domain.session.LogoutUseCase
 import com.example.techdelivery.R
 import com.example.techdelivery.databinding.ActivityLoginBinding
@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel: LoginViewModel by viewModels()
 
-    @Inject lateinit var test : RemoteUserSessionDataSource
+    @Inject lateinit var test : FirebaseUserSession
     @Inject lateinit var usecase : LogoutUseCase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +44,9 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth
             .startActivityForSignInWithProvider( /* activity= */this, provider.build())
             .addOnSuccessListener {
-                it.user?.getIdToken(true)
-                    ?.addOnCompleteListener {
-                        it.result?.token
-                    }
+                it.user?.getIdToken(true)?.addOnSuccessListener {
+                    it.token
+                }
             }
             .addOnFailureListener {
                 Log.e("Error", it.message ?: "")

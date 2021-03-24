@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 interface SessionRepository {
 
     fun logout() : Flow<Unit>
-    fun userLoggedIn() : Flow<Boolean>
+    fun getSessionState() : Flow<SessionState>
 
 }

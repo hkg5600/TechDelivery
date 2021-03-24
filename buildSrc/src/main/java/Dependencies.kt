@@ -26,4 +26,7 @@ object Dependencies {
     const val firebase_bom = "com.google.firebase:firebase-bom:26.7.0"
     const val firebase_analytics = "com.google.firebase:firebase-analytics-ktx"
     const val firebase_auth = "com.google.firebase:firebase-auth-ktx"
+
+    const val retrofit2 = "com.squareup.retrofit2:retrofit:2.9.0"
+    const val gson_converter = "com.squareup.retrofit2:converter-gson:2.9.0"
 }

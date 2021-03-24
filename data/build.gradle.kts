@@ -48,4 +48,7 @@ dependencies {
     implementation (platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics)
     implementation(Dependencies.firebase_auth)
+
+    implementation(Dependencies.gson_converter)
+    implementation(Dependencies.retrofit2)
 }
