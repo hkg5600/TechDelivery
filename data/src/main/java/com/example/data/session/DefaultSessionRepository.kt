@@ -26,13 +26,13 @@ class DefaultSessionRepository @Inject constructor(
 
     @FlowPreview
     override fun refreshToken(): Flow<Result<Token>> {
-        // loadToken from local
-        return cacheAccountDataSource.loadToken().flatMapConcat {
-            // if token is null, just make Token instance and refresh token. it should fail.
-            remoteAccountDataSource.refreshToken(Token(it ?: "")).map { result ->
+        // Load token from local
+        return cacheAccountDataSource.loadToken().flatMapConcat { token ->
+            // If token is null, just make Token instance with empty string and pass it to refreshToken func. And it will fail on server.
+            remoteAccountDataSource.refreshToken(Token(token ?: "")).map { result ->
                 when (result) {
                     is Result.Loading -> Result.Loading
-                    is Result.Success -> Result.Success(Token(result.data.token))
+                    is Result.Success -> Result.Success(result.data.createToken())
                     is Result.Error -> Result.Error(result.exception)
                 }
 

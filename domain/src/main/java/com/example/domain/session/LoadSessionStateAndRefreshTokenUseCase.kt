@@ -30,6 +30,7 @@ class LoadSessionStateAndRefreshTokenUseCase @Inject constructor(
                         sessionRepository.saveToken(it.data)
                         emit(Result.Success(SessionState.LOGIN))
                     } else {
+                        // RE_LOGIN means user logged in before but token expired
                         emit(Result.Success(SessionState.RE_LOGIN))
                     }
                 }
