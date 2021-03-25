@@ -1,8 +1,10 @@
 package com.example.data.session
 
+import com.example.domain.NoTokenFoundException
 import com.example.domain.session.SessionRepository
 import com.example.domain.session.SessionState
 import com.example.domain.session.model.RefreshToken
+import com.example.domain.session.model.Token
 import com.example.domain.utils.Result
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -23,18 +25,28 @@ class DefaultSessionRepository @Inject constructor(
     }
 
     @FlowPreview
-    override fun refreshToken(): Flow<Result<RefreshToken>> {
-        return cacheAccountDataSource.loadToken().flatMapConcat { // loadToken
-            remoteAccountDataSource.refreshToken(it).map { result ->
+    override fun refreshToken(): Flow<Result<Token>> {
+        // loadToken from local
+        return cacheAccountDataSource.loadToken().flatMapConcat {
+            // if token is null, just make Token instance and refresh token. it should fail.
+            remoteAccountDataSource.refreshToken(Token(it ?: "")).map { result ->
                 when (result) {
                     is Result.Loading -> Result.Loading
-                    is Result.Success -> Result.Success(result.data.toDomain())
+                    is Result.Success -> Result.Success(Token(result.data.token))
                     is Result.Error -> Result.Error(result.exception)
                 }
 
             }
 
         }
+    }
+
+    override fun saveToken(token: Token): Flow<Result<Unit>> {
+        return cacheAccountDataSource.saveToken(token)
+    }
+
+    override fun saveRefreshToken(token: RefreshToken): Flow<Result<Unit>> {
+        return cacheAccountDataSource.saveRefreshToken(token)
     }
 
 }

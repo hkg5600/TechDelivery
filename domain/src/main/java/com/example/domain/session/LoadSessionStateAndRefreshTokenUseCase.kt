@@ -1,5 +1,6 @@
 package com.example.domain.session
 
+import com.example.domain.session.model.Token
 import com.example.domain.utils.FlowUseCase
 import com.example.domain.utils.IoDispatcher
 import com.example.domain.utils.Result
@@ -16,13 +17,17 @@ class LoadSessionStateAndRefreshTokenUseCase @Inject constructor(
     override fun executeFlow(parameter: Unit): Flow<Result<SessionState>> {
         return flow {
             emit(Result.Loading)
+            // Check firebase auth already logged in
             sessionRepository.loadSessionState().map { sessionState ->
-                if (sessionState == SessionState.LOGOUT) { // if SessionState is LOGOUT, emit LOGOUT
+                // If SessionState is LOGOUT, emit LOGOUT so that user can enter LoginActivity
+                if (sessionState == SessionState.LOGOUT) {
                     emit(Result.Success(sessionState))
                 }
-                sessionRepository.refreshToken().map { // if SessionState is LOGIN, refresh token. if refresh fails, RE_LOGIN, succeed, LOGIN
+                // Refresh token.
+                sessionRepository.refreshToken().map {
+                    // If refresh fails, emit RE_LOGIN, succeeds, save token and emit LOGIN
                     if (it is Result.Success) {
-                        //Todo save token
+                        sessionRepository.saveToken(it.data)
                         emit(Result.Success(SessionState.LOGIN))
                     } else {
                         emit(Result.Success(SessionState.RE_LOGIN))

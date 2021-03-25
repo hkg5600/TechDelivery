@@ -51,4 +51,6 @@ dependencies {
 
     implementation(Dependencies.gson_converter)
     implementation(Dependencies.retrofit2)
+
+    implementation(Dependencies.datastore)
 }
