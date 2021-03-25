@@ -17,7 +17,7 @@ class FirebaseUserSession @Inject constructor(
     }
 
     fun loadSessionState() : Flow<SessionState> = flow {
-        if (firebaseAuth.currentUser == null) { // if current user == null 이라면 유저가 한 번도 로그인을 하지 않았거나 로그아웃한 상태이다.
+        if (firebaseAuth.currentUser == null) { // currentUser == null means that user never logged in or logged out
             emit(SessionState.LOGOUT)
         } else {
             emit(SessionState.LOGIN)
