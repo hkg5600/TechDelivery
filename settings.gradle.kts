@@ -1,5 +1,3 @@
 include(":core")
-include (":data")
-include (":domain")
 include (":presentation")
 rootProject.name = "TechDelivery"
