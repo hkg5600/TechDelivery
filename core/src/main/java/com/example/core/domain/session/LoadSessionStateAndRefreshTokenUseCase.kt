@@ -21,6 +21,7 @@ class LoadSessionStateAndRefreshTokenUseCase @Inject constructor(
                 // If SessionState is LOGOUT, emit LOGOUT so that user can enter LoginActivity
                 if (sessionState == SessionState.LOGOUT) {
                     emit(Result.Success(sessionState))
+                    return@map
                 }
                 // Refresh token.
                 sessionRepository.refreshToken().map {

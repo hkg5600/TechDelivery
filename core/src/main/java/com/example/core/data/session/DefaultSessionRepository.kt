@@ -2,6 +2,7 @@ package com.example.core.data.session
 
 import com.example.core.domain.session.SessionRepository
 import com.example.core.domain.session.SessionState
+import com.example.core.domain.session.model.LoginResult
 import com.example.core.domain.session.model.RefreshToken
 import com.example.core.domain.session.model.Token
 import com.example.core.utils.Result
@@ -14,6 +15,16 @@ class DefaultSessionRepository @Inject constructor(
     private val remoteAccountDataSource: RemoteAccountDataSource,
     private val cacheAccountDataSource: CacheAccountDataSource
 ) : SessionRepository {
+
+    override fun login(token: String): Flow<Result<LoginResult>> {
+        return remoteAccountDataSource.login(token).map {
+            when (it) {
+                is Result.Success -> Result.Success(it.data.toDomain())
+                is Result.Error -> Result.Error(it.exception)
+                is Result.Loading -> Result.Loading
+            }
+        }
+    }
 
     override fun logout(): Flow<Unit> {
         return userSession.logout()
