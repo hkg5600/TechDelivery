@@ -1,10 +1,12 @@
 package com.example.techdelivery.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.core.utils.EventObserver
+import com.example.techdelivery.main.MainActivity
 import com.example.techdelivery.R
 import com.example.techdelivery.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -13,7 +15,6 @@ import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -42,6 +43,21 @@ class LoginActivity : AppCompatActivity() {
             firebaseLogin(it)
         })
 
+        viewModel.navigateToMain.observe(this, EventObserver {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
+
+        viewModel.loginError.observe(this, EventObserver {
+            showSnackbar("로그인 중 에러가 발생하였습니다. (code : $it)", Snackbar.LENGTH_SHORT)
+        })
+
+        viewModel.loading.observe(this) {
+            if (!it) return@observe
+            showSnackbar("로그인 중...", Snackbar.LENGTH_INDEFINITE)
+        }
+
     }
 
     private fun firebaseReLogin() {
@@ -49,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         val provider = OAuthProvider.newBuilder("github.com")
 
         if (firebaseUser == null) {
-            showErrorSnackbar("기존 로그인 정보를 불러오는데 실패했습니다.")
+            showSnackbar("기존 로그인 정보를 불러오는데 실패했습니다.", Snackbar.LENGTH_SHORT)
         }
 
         firebaseUser
@@ -60,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             ?.addOnFailureListener {
-                showErrorSnackbar("기존 로그인 정보를 불러오는데 실패했습니다.")
+                showSnackbar("기존 로그인 정보를 불러오는데 실패했습니다.", Snackbar.LENGTH_SHORT)
             }
     }
 
@@ -77,25 +93,29 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                showErrorSnackbar("깃허브 연동에 실패하였습니다.")
+                showSnackbar("깃허브 연동에 실패하였습니다.", Snackbar.LENGTH_SHORT)
             }
     }
 
     private fun login(token: String?) {
         if (token.isNullOrBlank()) {
-            showErrorSnackbar("깃허브 연동에 실패하였습니다.")
+            showSnackbar("깃허브 연동에 실패하였습니다.", Snackbar.LENGTH_SHORT)
             return
         }
 
         viewModel.login(token)  //Login with this token
     }
 
-    private fun showErrorSnackbar(message: String) {
-        Snackbar.make(
-            binding.holderLayout,
-            message,
-            Snackbar.LENGTH_SHORT
-        ).show()
+    private val snackbar by lazy {
+        Snackbar.make(binding.holderLayout, "", Snackbar.LENGTH_SHORT)
+    }
+
+    private fun showSnackbar(message: String, mode: Int) {
+        snackbar.dismiss()
+        snackbar.setText(message)
+        snackbar.duration = mode
+        snackbar.animationMode = Snackbar.ANIMATION_MODE_SLIDE
+        snackbar.show()
     }
 
 }

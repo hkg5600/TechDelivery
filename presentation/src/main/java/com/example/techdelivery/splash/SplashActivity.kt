@@ -1,19 +1,16 @@
 package com.example.techdelivery.splash
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.example.core.utils.EventObserver
-import com.example.techdelivery.MainActivity
+import com.example.techdelivery.main.MainActivity
 import com.example.techdelivery.R
 import com.example.techdelivery.databinding.ActivitySplashBinding
 import com.example.techdelivery.login.LoginActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.dialog.MaterialDialogs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

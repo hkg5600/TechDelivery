@@ -21,6 +21,8 @@ class LoginUseCase @Inject constructor(
                when (it) {
                    is Result.Success -> {
                        //Save token, refresh token, member
+                       userSessionRepository.saveToken(it.data.token)
+                       userSessionRepository.saveRefreshToken(it.data.refreshToken)
                        emit(Result.Success(it.data.member)) //emit member to show user hello message.
                    }
                    is Result.Error -> emit(Result.Error(it.exception))

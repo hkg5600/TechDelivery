@@ -1,6 +1,7 @@
 package com.example.core.data.preference
 
 import android.app.Application
+import android.content.Context
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.createDataStore
@@ -18,16 +19,16 @@ import javax.inject.Singleton
 
 @Singleton
 class PreferenceDataStore @Inject constructor(
-    @ApplicationContext private val context: Application
+    @ApplicationContext private val context: Context
 ) {
 
     private val tokenStore: DataStore<Preferences> by lazy { context.createDataStore(name = TOKEN_STORE) }
 
     fun saveToken(token: Token): Flow<Result<Unit>> {
         return flow {
-            val TOKEN = preferencesKey<String>(TOKEN_VALUE)
+            val tokenPreferences = preferencesKey<String>(TOKEN_VALUE)
             tokenStore.edit {
-                it[TOKEN] = token.token
+                it[tokenPreferences] = token.token
             }
             emit(Result.Success(Unit))
         }
@@ -35,9 +36,9 @@ class PreferenceDataStore @Inject constructor(
 
     fun saveRefreshToken(token: RefreshToken): Flow<Result<Unit>> {
         return flow {
-            val TOKEN = preferencesKey<String>(REFRESH_TOKEN_VALUE)
+            val tokenPreferences = preferencesKey<String>(REFRESH_TOKEN_VALUE)
             tokenStore.edit {
-                it[TOKEN] = token.token
+                it[tokenPreferences] = token.token
             }
             emit(Result.Success(Unit))
         }
@@ -45,18 +46,18 @@ class PreferenceDataStore @Inject constructor(
 
     fun loadToken(): Flow<String?> {
         return flow {
-            val TOKEN = preferencesKey<String>(TOKEN_VALUE)
+            val tokenPreferences = preferencesKey<String>(TOKEN_VALUE)
             tokenStore.data.map {
-                emit(it[TOKEN])
+                emit(it[tokenPreferences])
             }
         }
     }
 
     fun loadRefreshToken(): Flow<String?> {
         return flow {
-            val TOKEN = preferencesKey<String>(REFRESH_TOKEN_VALUE)
+            val tokenPreferences = preferencesKey<String>(REFRESH_TOKEN_VALUE)
             tokenStore.data.map {
-                emit(it[TOKEN])
+                emit(it[tokenPreferences])
             }
         }
     }

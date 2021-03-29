@@ -1,7 +1,8 @@
-package com.example.techdelivery
+package com.example.techdelivery.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.techdelivery.R
 
 class MainActivity : AppCompatActivity() {
 

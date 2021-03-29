@@ -15,7 +15,7 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideTestApi(): UserService {
+    fun provideUserService(): UserService {
         return Retrofit.Builder()
             .baseUrl("ip_address")
             .addConverterFactory(GsonConverterFactory.create())
