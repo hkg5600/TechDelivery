@@ -1,7 +1,6 @@
 plugins {
     id ("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -19,6 +18,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility =  JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+        options.jvmTarget = "1.8"
     }
 
     buildTypes {
@@ -45,4 +49,13 @@ dependencies {
 
     implementation (Dependencies.hilt_android)
     kapt (Dependencies.hilt_compiler)
+
+    implementation (platform(Dependencies.firebase_bom))
+    implementation(Dependencies.firebase_analytics)
+    implementation(Dependencies.firebase_auth)
+
+    implementation(Dependencies.gson_converter)
+    implementation(Dependencies.retrofit2)
+
+    implementation(Dependencies.datastore)
 }

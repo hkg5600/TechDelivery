@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "556775779596",
+    "project_id": "techdelivery-2ad02",
+    "storage_bucket": "techdelivery-2ad02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556775779596:android:669ab4cd3fa41a9ebeed29",
+        "android_client_info": {
+          "package_name": "com.example.techdelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556775779596-poa91vd43b99mgug3lpdrhhnifa4bdc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.techdelivery",
+            "certificate_hash": "70066408e9ef177757c6d5c364f184b7e67d1bde"
+          }
+        },
+        {
+          "client_id": "556775779596-f3jr2o2frn4ejjpc0ujqvm50tno4ieek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMRKLKoHqbntmXFXV-m6-BFbohN98gk4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556775779596-f3jr2o2frn4ejjpc0ujqvm50tno4ieek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

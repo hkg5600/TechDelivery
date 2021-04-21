@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="검색"
+        android:id="@+id/bottom_search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_24_search"/>
+    <item
+        android:title="설정"
+        android:id="@+id/bottom_setting"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_24_setting"/>
+</menu>

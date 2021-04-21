@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.techdelivery.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/holder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.41"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="깃허브 계정으로 시작하기"
+            android:textColor="@color/textMedium"
+            android:textSize="24sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="@={viewModel.email}"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintVertical_bias="0.5"
+            android:hint="example@example.com"
+            android:background="@drawable/edit_text_email_background"
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionGo"
+            android:textSize="20sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="18dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="40dp"/>
+
+        <TextView
+            android:id="@+id/text_view_pass_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_email"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/textDisable"
+            android:paddingBottom="10dp"
+            android:onClick="@{() -> viewModel.navigateToMain()}"
+            android:text="아니요, 그냥 둘러볼게요"
+            android:paddingEnd="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
