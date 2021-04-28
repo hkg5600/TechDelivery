@@ -3,6 +3,7 @@ package com.example.techdelivery.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.techdelivery.R
 import com.example.techdelivery.databinding.ActivityMainBinding
 
@@ -13,5 +14,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+
+
     }
 }

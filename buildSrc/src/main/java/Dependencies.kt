@@ -30,4 +30,9 @@ object Dependencies {
     const val gson_converter = "com.squareup.retrofit2:converter-gson:2.9.0"
 
     const val datastore = "androidx.datastore:datastore-preferences:1.0.0-alpha01"
+
+    // Kotlin
+    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    const val navigation_ui = "androidx.navigation:navigation-ui-ktx:2.3.5"
+    const val navigation_dynamic = "androidx.navigation:navigation-dynamic-features-fragment:2.3.5"
 }

@@ -8,25 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="?attr/actionBarSize">
-
-            <TextView
-                android:id="@+id/text_view_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="TechDelivery"
-                android:textColor="@color/textHigh"
-                android:textSize="36sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+       <androidx.fragment.app.FragmentContainerView
+           android:id="@+id/fragment_container_view"
+           android:name="androidx.navigation.fragment.NavHostFragment"
+           android:layout_width="match_parent"
+           android:layout_marginBottom="?attr/actionBarSize"
+           app:defaultNavHost="true"
+           app:navGraph="@navigation/main_nav_graph"
+           android:layout_height="match_parent"/>
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"
